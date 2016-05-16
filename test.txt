@@ -1,0 +1,76 @@
+{
+  "mode": 2,
+  "rec": [
+    {
+      "id": "v200014",
+      "miojiTag": "推荐",
+      "rec": "Hello PHP"
+    },
+    {
+      "id": "v200014",
+      "miojiTag": {
+        "id": "v200014",
+        "miojiTag": [
+          {
+            "id": "v200014",
+            "miojiTag": "推荐",
+            "rec": "Hello PHP"
+          },
+          {
+            "id": "v200014",
+            "miojiTag": "推荐",
+            "rec": "Hello PHP"
+          },
+          {
+            "id": "v200014",
+            "miojiTag": "推荐",
+            "rec": "Hello PHP"
+          }
+        ],
+        "rec": "Hello PHP"
+      },
+      "rec": "Hello PHP"
+    },
+    {
+      "id": "v200014",
+      "miojiTag": "推荐",
+      "rec": [
+        {
+          "id": "v200014",
+          "miojiTag": "推荐",
+          "rec": "Hello PHP"
+        },
+        {
+          "id": "v200014",
+          "miojiTag": "推荐",
+          "rec": "Hello PHP"
+        },
+        {
+          "id": "v200014",
+          "miojiTag": [
+            {
+              "id": "v200014",
+              "miojiTag": "推荐",
+              "rec": "Hello PHP"
+            },
+            {
+              "id": "v200014",
+              "miojiTag": "推荐",
+              "rec": "Hello PHP"
+            },
+            {
+              "id": "v200014",
+              "miojiTag": "推荐",
+              "rec": "Hello PHP"
+            }
+          ],
+          "rec": "Hello PHP"
+        }
+      ]
+    }
+  ],
+  "img": "http://mioji.attr.kssws.ks-cdn.com/v200014_1.jpg",
+  "tag": "教堂|广场",
+  "score": "9.65",
+  "name": "威尼斯圣马可大教堂"
+}
