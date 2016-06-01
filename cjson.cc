@@ -339,26 +339,28 @@ void skip_white(char* s,char **addr){
 }
 
 void print_json(JSON* json,int dep){
-	for(int j= 0;j<dep;j++)printf("\t");
 	printf("{\n");
 	for(int i = 0 ;i< json->len;i++){
 		if(json->types[i]==T_JSON){	
 			for(int j= 0;j<dep;j++)printf("\t");
-			printf("\"%s\":\n",json->keys[i]);		
+			printf("\"%s\":",json->keys[i]);		
 			print_json((JSON*)json->vals[i],dep+1);
-			printf("%c",i==json->len-1?' ':',');		
+			printf("%c\n",i==json->len-1?' ':',');		
 		}else if(json->types[i] == T_JSON_ARRAY){
 			for(int j= 0;j<dep;j++)printf("\t");
-			printf("\"%s\":[",json->keys[i]);
+			printf("\"%s\":[\n",json->keys[i]);
 			JSON** val = (JSON**)json->vals[i];
 			while(*val!=NULL){
+				for(int j= 0;j<dep+1;j++)printf("\t");
 				print_json((JSON*)(*val),dep+1);
 				val++;
 				if(*val!=NULL)
-				printf(",");
+				printf(",\n");
 			}
-			printf("]\n");
-			printf("%c",i==json->len-1?' ':',');		
+			printf("\n");
+			for(int j= 0;j<dep;j++)printf("\t");
+			printf("]");
+			printf("%c\n",i==json->len-1?' ':',');		
 		}else{
 			for(int j= 0;j<dep;j++)printf("\t");
 			if(json->types[i] == T_STR){
@@ -369,7 +371,7 @@ void print_json(JSON* json,int dep){
 		}
 	}
 	for(int j= 0;j<dep;j++)printf("\t");
-	printf("}\n");
+	printf("}");
 }
 int main(){
 
@@ -383,7 +385,6 @@ int main(){
 	//trim(jsonstr);
 	char *s=jsonstr;
 	JSON* json= parseJson(s,&s);
-	printf("\n\n");
 	print_json(json,0);
 	// while(*json!=NULL){
 	// 	print_json((JSON*)(*json),0);
