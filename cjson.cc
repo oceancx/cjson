@@ -19,7 +19,10 @@ using namespace std;
 #define T_BRACKET_RIGHT=10;
 #define T_COMMA =11;
 #define T_D_QUOTES=12;
+
 void skip_white(char* s,char **addr);
+
+
 typedef struct List_TYPE
 {
 	void* val;
@@ -46,7 +49,6 @@ List* insertList(List* list,void* val){
 	List* node= (List*)malloc(sizeof(List));
 	node->val = val;
 	node->next=NULL;
-
 
 	List* last =lastElement(list);
 	last->next = node;
@@ -338,7 +340,7 @@ void skip_white(char* s,char **addr){
 
 void print_json(JSON* json,int dep){
 	for(int j= 0;j<dep;j++)printf("\t");
-			printf("{\n");
+	printf("{\n");
 	for(int i = 0 ;i< json->len;i++){
 		if(json->types[i]==T_JSON){	
 			for(int j= 0;j<dep;j++)printf("\t");
@@ -346,9 +348,7 @@ void print_json(JSON* json,int dep){
 			print_json((JSON*)json->vals[i],dep+1);
 			printf("%c",i==json->len-1?' ':',');		
 		}else if(json->types[i] == T_JSON_ARRAY){
-			for(int j= 0;j<dep;j++){
-				printf("\t");
-			}
+			for(int j= 0;j<dep;j++)printf("\t");
 			printf("\"%s\":[",json->keys[i]);
 			JSON** val = (JSON**)json->vals[i];
 			while(*val!=NULL){
@@ -360,22 +360,16 @@ void print_json(JSON* json,int dep){
 			printf("]\n");
 			printf("%c",i==json->len-1?' ':',');		
 		}else{
-			for(int j= 0;j<dep;j++){
-				printf("\t");
-			}
+			for(int j= 0;j<dep;j++)printf("\t");
 			if(json->types[i] == T_STR){
 				printf("\"%s\":\"%s\"%c\n", json->keys[i],json->vals[i],i==json->len-1?' ':','); 
 			}else{
 				printf("\"%s\":%s%c\n", json->keys[i],json->vals[i],i==json->len-1?' ':','); 
 			}
-			
 		}
 	}
-	for(int j= 0;j<dep;j++){
-				printf("\t");
-			}
+	for(int j= 0;j<dep;j++)printf("\t");
 	printf("}\n");
-	
 }
 int main(){
 
