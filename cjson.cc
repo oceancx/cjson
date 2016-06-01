@@ -105,7 +105,7 @@ void trim(char *s){
 	}
 	*s='\0';
 	s=p;
-	printf("%s\n", p);
+	// printf("%s\n", p);
 }
 
 
@@ -264,7 +264,7 @@ JSON* parseJson(char *s,char** addr){
 	{
 		*addr=p;
 		char *key = parseKey(p,addr);
-		printf("key: %s ", key);
+		// printf("key: %s ", key);
 		p=*addr;
 		//printf("p:%d &p:%d\n", p,addr);
 		if(key == NULL)break;
@@ -289,7 +289,7 @@ JSON* parseJson(char *s,char** addr){
 
 		
 		
-		printf("type: %d val: %s\n",type, (char*)val);
+		// printf("type: %d val: %s\n",type, (char*)val);
 
 		if(type==-1){
 			printf("type解析出错!\n");
@@ -337,21 +337,45 @@ void skip_white(char* s,char **addr){
 }
 
 void print_json(JSON* json,int dep){
-//	printf("%d\n", json->len);
-
+	for(int j= 0;j<dep;j++)printf("\t");
+			printf("{\n");
 	for(int i = 0 ;i< json->len;i++){
-		for(int j= 0;j<dep;j++)printf("\t");
-		printf("key: %s\tval: %s\n", json->keys[i],json->vals[i]); 
-		if(json->types[i]==T_JSON){
+		if(json->types[i]==T_JSON){	
+			for(int j= 0;j<dep;j++)printf("\t");
+			printf("\"%s\":\n",json->keys[i]);		
 			print_json((JSON*)json->vals[i],dep+1);
+			printf("%c",i==json->len-1?' ':',');		
 		}else if(json->types[i] == T_JSON_ARRAY){
+			for(int j= 0;j<dep;j++){
+				printf("\t");
+			}
+			printf("\"%s\":[",json->keys[i]);
 			JSON** val = (JSON**)json->vals[i];
 			while(*val!=NULL){
 				print_json((JSON*)(*val),dep+1);
 				val++;
+				if(*val!=NULL)
+				printf(",");
 			}
+			printf("]\n");
+			printf("%c",i==json->len-1?' ':',');		
+		}else{
+			for(int j= 0;j<dep;j++){
+				printf("\t");
+			}
+			if(json->types[i] == T_STR){
+				printf("\"%s\":\"%s\"%c\n", json->keys[i],json->vals[i],i==json->len-1?' ':','); 
+			}else{
+				printf("\"%s\":%s%c\n", json->keys[i],json->vals[i],i==json->len-1?' ':','); 
+			}
+			
 		}
 	}
+	for(int j= 0;j<dep;j++){
+				printf("\t");
+			}
+	printf("}\n");
+	
 }
 int main(){
 
